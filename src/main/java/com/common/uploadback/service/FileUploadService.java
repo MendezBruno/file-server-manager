@@ -2,14 +2,11 @@ package com.common.uploadback.service;
 
 import com.common.uploadback.FileImports;
 import com.common.uploadback.FileImportsResponse;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -22,18 +19,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 
 @Service
 public class FileUploadService {
 
     //esta es la url a donde lo quiero subir
-    private static String APIURL = "http://192.168.35.103:9000/api/file-imports/upload";
+    private static String APIURL =  ""; // "http://192.168.35.103:9000/api/file-imports/upload";
 
     private RestTemplate restTemplate;
 
@@ -109,4 +103,9 @@ public class FileUploadService {
         converters.add(new FormHttpMessageConverter());
         return converters;
     }
+
+
+
+
+
 }

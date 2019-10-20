@@ -4,22 +4,29 @@ import com.common.uploadback.FileImports;
 import com.common.uploadback.service.FileUploadService;
 import com.common.uploadback.repository.FileImportRepository;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.io.File;
+
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/v1/fileImport")
 @CrossOrigin
 public class FileImportController {
 
+    private static final Logger logger = LoggerFactory.getLogger(FileImportController.class);
+
     @Autowired
     FileImportRepository repo;
+
+
 
     @GetMapping("/fileImport/{id}")
     public FileImports getMap(@PathVariable ObjectId id) {
@@ -39,7 +46,7 @@ public class FileImportController {
        return repo.save(fileImports);
     }
 
-    @PostMapping
+    @PostMapping("/uploadToServer")
     public void uploadToServer() {
 
         FileUploadService fileUploadService = new FileUploadService(new RestTemplateBuilder());
@@ -47,4 +54,7 @@ public class FileImportController {
         //FileImports fileImports = fileUploadService.postFile(UNARGUMENTOQUETODAVINANOSEUQEES, someBytes);
         //repo.save(fileImports);
     }
+
+
+
 }
