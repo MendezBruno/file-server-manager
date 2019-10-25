@@ -1,7 +1,15 @@
 package com.common.uploadback;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
+@Document("uploadFileResponse")
 public class UploadFileResponse {
 
+    @Id
+    private ObjectId id;
     private String fileName;
     private String fileDownloadUri;
     private String fileType;
@@ -47,5 +55,11 @@ public class UploadFileResponse {
     }
 
 
+    public ObjectId getId() {
+        return id;
+    }
 
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 }

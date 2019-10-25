@@ -6,7 +6,7 @@ public class FileStorageProperties {
 
     public FileStorageProperties() {
 
-        this.setUploadDir("/uploads");
+        this.setUploadDir("uploads");
     }
 
     public FileStorageProperties(String customFolder) {

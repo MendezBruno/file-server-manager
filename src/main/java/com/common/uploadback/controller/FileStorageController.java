@@ -1,6 +1,7 @@
 package com.common.uploadback.controller;
 
 import com.common.uploadback.UploadFileResponse;
+import com.common.uploadback.repository.UploadFileResponseRepository;
 import com.common.uploadback.service.FileStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,8 @@ public class FileStorageController {
 
     private static final Logger logger = LoggerFactory.getLogger(FileStorageController.class);
 
-
+    @Autowired
+    UploadFileResponseRepository uploadFileResponseRepository;
     // todo Ver como insertar el servicio de fileStorageService
 
     @PostMapping("/uploadFile")
@@ -36,12 +38,12 @@ public class FileStorageController {
         String fileName = fileStorageService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+                .path("/api/v1/fileStorage/downloadFile/")
                 .path(fileName)
                 .toUriString();
-
-        return new UploadFileResponse(fileName, fileDownloadUri,
+        UploadFileResponse uploadFileResponse = new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
+        return uploadFileResponseRepository.save(uploadFileResponse);
     }
 
     @PostMapping("/uploadMultipleFiles")
